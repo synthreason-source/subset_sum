@@ -120,11 +120,12 @@ def holographic_equation_beam_search_disk(filepath, n, target, r, c=2, max_beam_
 if __name__ == "__main__":
     db_path = "subset_numbers.bin"
     n_scale = 1_000_000_000  # Scale up freely (e.g., 50_000_000) based on your available disk space
-    sample_target = 150_000_000
+    sample_target = 150_000_001
     auto_r = 0.35
 
     # Step 1: Generate dataset to disk
-    generate_disk_dataset(db_path, n_scale, seed=42)
+    if input("Generate dataset? (y): ") == "y":
+        generate_disk_dataset(db_path, n_scale, seed=42)
 
     # Step 2: Run beam search via direct disk streaming
     print(f"Running disk-streamed beam search across {n_scale:,} records...")
