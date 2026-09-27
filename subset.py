@@ -119,12 +119,19 @@ def holographic_equation_beam_search_disk(filepath, n, target, r, c=2, max_beam_
 
 if __name__ == "__main__":
     db_path = "subset_numbers.bin"
-    n_scale = 1_000_000_000  # Scale up freely (e.g., 50_000_000) based on your available disk space
+    n_scale = 1_000_000_000  # Scale up freely based on your available disk space
     sample_target = 150_000_001
     auto_r = 0.35
 
-    # Step 1: Generate dataset to disk
-    if input("Generate dataset? (y): ") == "y":
+    print("=== Holographic Beam Search Pipeline ===")
+    
+    # Step 1: Automatically check dataset status (prevents accidental overwrites)
+    if os.path.exists(db_path):
+        file_size_mb = os.path.getsize(db_path) / (1024 * 1024)
+        print(f"[INFO] Dataset already exists at '{db_path}' ({file_size_mb:.2f} MB).")
+        print("[INFO] Skipping generation to protect existing data and save time.\n")
+    else:
+        print(f"[INFO] Dataset not found at '{db_path}'. Creating a new one...")
         generate_disk_dataset(db_path, n_scale, seed=42)
 
     # Step 2: Run beam search via direct disk streaming
