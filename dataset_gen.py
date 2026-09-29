@@ -407,12 +407,12 @@ def main():
 
     parser.add_argument(
         "--output",
-        default="social_isomorphism_10mb.jsonl",
+        default="social_isomorphism_1mb.jsonl",
     )
 
     parser.add_argument(
         "--size",
-        default="10MB",
+        default="1MB",
         help="Examples: 500MB, 500MiB, 1GB",
     )
 
